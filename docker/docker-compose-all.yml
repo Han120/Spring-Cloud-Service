@@ -1,0 +1,21 @@
+version: '2'
+services:
+  system-service:
+    image: system-dept/system-dept:latest
+    ports:
+      - "8801:8001"
+  database:
+    image: mysql:8.0.2
+    ports:
+      - "8806:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_USER: 'root'
+      MYSQL_PASS: '123456'
+  business-service:
+    image: business-dept/business-dept:latest
+    ports:
+      - "8802:8002"
+    depends_on:
+      - system-service
+      - database

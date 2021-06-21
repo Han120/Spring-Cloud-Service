@@ -1,0 +1,14 @@
+version: '2'
+services:
+  system-service:
+      image: system-dept/system-dept:latest
+      ports:
+        - "8888:8888"
+  database:
+    image: mysql:8.0.2
+    ports:
+      - "8067:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_USER: 'root'
+      MYSQL_PASS: '123456'
