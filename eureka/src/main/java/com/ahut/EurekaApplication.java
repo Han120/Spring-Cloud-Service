@@ -10,20 +10,16 @@ import org.springframework.core.env.Environment;
 /**
  * @author hzj
  */
-@EnableEurekaServer
+@EnableEurekaServer  //Eureka Server 服务启动类，接收其他微服务注册进来
 @SpringBootApplication
 public class EurekaApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EurekaApplication.class);
 
     public static void main(String[] args) {
-        try {
-            SpringApplication application = new SpringApplication(EurekaApplication.class);
-            Environment environment = application.run(args).getEnvironment();
-            LOGGER.info("启动成功");
-            LOGGER.info("System地址：\thttp://127.0.0.1:{}", environment.getProperty("server.port"));
-        } catch (Exception e) {
-            LOGGER.error("启动失败====> {}", e.getMessage(), e);
-        }
+        SpringApplication application = new SpringApplication(EurekaApplication.class);
+        Environment environment = application.run(args).getEnvironment();
+        LOGGER.info("启动成功");
+        LOGGER.info("System地址：\thttp://127.0.0.1:{}", environment.getProperty("server.port"));
     }
 }
