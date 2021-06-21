@@ -20,6 +20,9 @@
         <druid.version>1.2.2</druid.version>
         <spring-boot.version>2.5.1</spring-boot.version>
         <pact-java.version>3.3.6</pact-java.version>
+        <devtools.version>2.5.1</devtools.version>
+        <mysql-connector.version>8.0.22</mysql-connector.version>
+        <mybatis.version>1.3.0</mybatis.version>
     </properties>
 
     <dependencyManagement>
@@ -42,28 +45,36 @@
                 <scope>import</scope>
             </dependency>
 
+            <!--MySQL连接配置-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.22</version>
+                <version>${mysql-connector.version}</version>
             </dependency>
+
             <!--阿里数据库连接池 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
+
+            <!--mybatis配置-->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>1.3.0</version>
+                <version>${mybatis.version}</version>
             </dependency>
+
+            <!--单元测试-->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <!--log4j-->
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
@@ -71,6 +82,7 @@
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/au.com.dius/pact-jvm-consumer-junit_2.11 -->
+            <!--pact-->
             <dependency>
                 <groupId>au.com.dius</groupId>
                 <artifactId>pact-jvm-consumer-junit_2.11</artifactId>
@@ -79,6 +91,14 @@
             </dependency>
 
 
+            <!-- 热部署插件 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${devtools.version}</version>
+            </dependency>
+
+            <!--microcourse-api-->
             <dependency>
                 <groupId>com.ahut</groupId>
                 <artifactId>microcourse-api</artifactId>
@@ -88,15 +108,24 @@
         </dependencies>
     </dependencyManagement>
 
-    <modules>
-        <module>business</module>
-        <module>system</module>
-        <module>api</module>
-        <module>eureka</module>
-    </modules>
-
     <build>
+
+        <finalName>${project.name}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -106,7 +135,17 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
+
+
+    <modules>
+        <module>business</module>
+        <module>system</module>
+        <module>api</module>
+        <module>eureka</module>
+    </modules>
 
 </project>

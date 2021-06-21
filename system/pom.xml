@@ -45,10 +45,30 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <!--actuator监控信息的完善-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 
@@ -71,7 +91,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-<!--                <version>1.0.0</version>-->
+                <!--                <version>1.0.0</version>-->
                 <!--将插件绑定在某个phase执行-->
                 <executions>
                     <execution>
@@ -93,7 +113,7 @@
                     <!-- 指定 Dockerfile 路径-->
                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
                     <!--指定远程 docker api地址-->
-<!--                    <dockerHost>http://8.136.210.255:5359</dockerHost>-->
+                    <!--                    <dockerHost>http://8.136.210.255:5359</dockerHost>-->
                     <dockerHost>http://localhost:2375</dockerHost>
                     <!-- 这里是复制 jar 包到 docker 容器指定目录配置 -->
                     <resources>

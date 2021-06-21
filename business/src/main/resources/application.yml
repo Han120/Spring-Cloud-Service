@@ -1,3 +1,26 @@
 server:
   port: 8002
 
+#eureka client 配置
+eureka:
+  client: #客户端注册进eureka服务列表中
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    instance-id: business-dept8002  # 自定义服务名称信息
+    prefer-ip-address: true  #访问路径可以显示IP地址
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app.name: microcourse
+  company.name: ahut
+  build.artifactId: @project.artifactId@
+  build.version: @project.version@
+  
+spring:
+  application:
+    name: business-dept
